@@ -6,7 +6,7 @@ module.exports = {
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
-  
+
   getUserById(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
@@ -26,7 +26,7 @@ module.exports = {
 
   // update a user
   updateUserById(req, res) {
-    User.findByIdAndUpdate({ _id: req.params.id }, {
+    User.findByIdAndUpdate({ _id: req.params.userId }, {
       $set: req.body
     })
       .then(data => {
@@ -36,18 +36,18 @@ module.exports = {
         } else {
           console.error('Update Data not Successful!')
         }
-      })
+      }).catch((err) => res.status(500).json(err));
   },
 
   // delete a User
   deleteUserById(req, res) {
-    User.findOneAndDelete({ _id: req.params.id })
+    User.findOneAndDelete({ _id: req.params.userId })
       .then((dbUserData) => {
         if (!dbUserData) {
-          return res.status(404).json({message: "User Not Found!"})
+          return res.status(404).json({ message: "User Not Found!" })
         }
-        res.status(200).json({message: "User Delted Successfully"})
-      
+        res.status(200).json({ message: "User Deleted Successfully" })
+
       })
       .catch((err) => res.status(500).json(err));
   },

@@ -7,14 +7,10 @@ const {
   deleteThoughtById,
 } = require('../../controllers/thoughtController');
 
-// /api/videos
+// /api/thoughts
 router.route('/').get(getThoughts).post(createThought);
 
-
-// /api/videos/:videoId/responses
-router.route('/:videoId/responses').post(addVideoResponse);
-
-// /api/videos/:videoId/responses/:responseId
-router.route('/:videoId/responses/:responseId').delete(removeVideoResponse);
+// api/thought
+router.route('/:thoughtId').get(getThoughtById).delete(deleteThoughtById).put(updateThoughtById);
 
 module.exports = router;

@@ -12,7 +12,8 @@ connection.once('open', async () => {
   const users = [];
   const videos = getRandomVideos(10);
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 20; i++) {ls
+    
     const fullName = getRandomName();
     const first = fullName.split(' ')[0];
     const last = fullName.split(' ')[1];

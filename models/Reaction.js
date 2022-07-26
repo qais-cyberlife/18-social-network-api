@@ -1,11 +1,11 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types} = require('mongoose');
 
 // Schema to create User model
 const reactionSchema = new Schema(
   {
     reactionId: {
-      type: mongoose.Types.ObjectId,
-      default: new mongoose.Types.ObjectId,
+      type: Schema.Types.ObjectId,
+      default: new Types.ObjectId(),
     },
 
     reactionBody: {
@@ -38,8 +38,4 @@ const reactionSchema = new Schema(
   },
 );
 
-
-// Initialize our Reaction model
-const Reaction = model('reaction', reactionSchema);
-
-module.exports = Reaction;
+module.exports = reactionSchema;

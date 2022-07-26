@@ -6,17 +6,6 @@ module.exports = {
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
-
-  getThoughtById(req, res) {
-    Thought.findOne({ _id: req.params.thoughtId })
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({ message: 'No Thought with that ID' })
-          : res.json(Thought)
-      )
-      .catch((err) => res.status(500).json(err));
-  },
-  
   // create a new Thought
   createThought(req, res) {
     Thought.create(req.body)
@@ -39,7 +28,20 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-  updateThought(req, res) {
+  
+  getThoughtById(req, res) {
+    Thought.findOne({ _id: req.params.userId })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No Thought with that ID' })
+          : res.json(Thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+  
+
+
+  updateThoughtById(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.ThoughtId },
       { $set: req.body },
@@ -55,7 +57,7 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-  deleteThought(req, res) {
+  deleteThoughtById(req, res) {
     Thought.findOneAndRemove({ _id: req.params.ThoughtId })
       .then((Thought) =>
         !Thought
